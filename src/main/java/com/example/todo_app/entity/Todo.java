@@ -23,7 +23,7 @@ public class Todo{
     private Boolean completed = false; 
 
     // コンストラクタ
-    pubulic Todo(){
+    public Todo(){
     }
 
     public Todo(String title, Boolean completed){
