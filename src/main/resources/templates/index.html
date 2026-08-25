@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todoアプリ</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>ToDo リスト</h1>
+
+    <div class="addTodo">
+        <form th:action="@{/add}" method="post">
+            <input type="text" name="title" placeholder="新しいタスク入力" required>
+            <button type="submit">追加</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="column">
+            <h2>未完了</h2>
+            <div class="card-list">
+                <table th:if="${#lists.size(todos.?[!completed]) > 0}" class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="todo : ${todos}" th:if="${!todo.completed}">
+                            <td th:text="${todo.id}">1</td>
+                            <td th:text="${todo.title}" class="text-left">サンプルタスク</td>
+                            <td th:text="${todo.completed ? '完了' : '未完了'}">未完了</td>
+                            <td>
+                                <form th:action="@{/delete/{id}(id=${todo.id})}" method="post">
+                                    <button type="submit" class="btn-rounded">削除</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/toggle/{id}(id=${todo.id})}" method="post">
+                                    <button type="submit" class="btn-rounded">完了</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="column">
+            <h2>完了</h2>
+            <div class="card-list">
+                <table th:if="${#lists.size(todos.?[completed]) > 0}" class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="todo : ${todos}" th:if="${todo.completed}">
+                            <td th:text="${todo.id}">1</td>
+                            <td th:text="${todo.title}" class="text-left">サンプルタスク</td>
+                            <td>
+                                <form th:action="@{/delete/{id}(id=${todo.id})}" method="post">
+                                    <button type="submit" class="btn-rounded">削除</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/toggle/{id}(id=${todo.id})}" method="post">
+                                    <button type="submit" class="btn-rounded">戻す</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

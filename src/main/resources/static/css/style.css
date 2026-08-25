@@ -1,0 +1,40 @@
+body {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.card-list{
+    box-sizing: border-bocx;
+    background-color: #f0f0f0;
+    min-height: 250px;
+    min-width: 280px;
+    padding: 10px,5px;
+}
+
+.column {
+    width: auto;
+}
+
+.card-list table{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.card-list th,
+.card-list td{
+    padding:8px, 5px;
+    text-align: center;
+}
+
+.card-list td.text-left {
+    text-align: left;
+    padding-left: 10px;
+}
